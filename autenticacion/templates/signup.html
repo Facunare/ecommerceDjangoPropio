@@ -1,0 +1,42 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+    
+    <main class="main-singin">
+        <form action="/signup/" method="POST" class="form-singin">
+            {% csrf_token %}
+            <img src="{% static 'profile.svg' %}" alt="profile img" class="profile-img">
+            <div class="input-div">
+                <img src="{% static 'user.svg' %}" alt="">
+                <input placeholder="Username" type="text" name="username" id="username" autocomplete="off">
+            </div>
+            <div class="input-div">
+                <img src="{% static 'lock.svg' %}" alt="">
+                <input placeholder="Password" type="password" name="password1" id="password1" autocomplete="off">
+            </div>
+            <div class="input-div">
+                <img src="{% static 'lock.svg' %}" alt="">
+                <input placeholder="Confirm Password" type="password" name="password2" id="password2" autocomplete="off">
+            </div>
+            <button>
+                SIGN UP
+            </button>
+        </form>
+        {% if error %}
+        <span style="position: absolute;color: red;
+        top: 20px; outline: 1px solid red; border-radius: 10px; padding: 10px;">{{error}}</span>
+       {% endif %}
+    </main>
+
+        
+</body>
+</html>

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'contacto.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <title>Contacto</title>
+  </head>
+  <body>
+    
+  {% block content %}
+  <link rel="stylesheet" href="{% static 'contacto.css' %}" />
+    
+    <main class="main-contact">
+        <h1 class="aviso"></h1>
+        <form action="" method="POST" class="contact-form">
+          {% csrf_token %}
+          <h1 class="contact-title">Contacto</h1>
+            <div class="input-div">
+          <input type="text" name="asunto" id="asunto" autocomplete="off"  class="input-asunto"/>
+          <label for="asunto">Asunto</label>
+        </div>
+        <div class="input-div">
+          <input type="email" name="email" id="email" autocomplete="off"  class="input-mail"/>
+          <label for="email">Email</label>
+        </div>
+        <div class="input-div">
+            <textarea name="mensaje" id="mensaje" class="input-text" cols="30"></textarea>
+            <label for="mensaje">Mensaje</label>
+        </div>
+
+        <input type="submit" value="Enviar" />
+      </form>
+    </main>
+
+    <script>
+      let lista = $(".input-div");
+      for (const e of lista) {
+        let children = e.children;
+        let input = children[0];
+        let label = children[1];
+        $(input).on("focus", () => {
+          $(label).addClass("focussed");
+        });
+        $(input).on("blur", () => {
+          if (!$.trim($(input).val())) {
+            $(label).removeClass("focussed");
+          }
+        });
+      }
+
+      const form = document.querySelector(".contact-form")
+      const aviso = document.querySelector(".aviso")
+      const mail = document.querySelector(".input-mail")
+      const asunto = document.querySelector(".input-asunto")
+      const text = document.querySelector(".input-text")
+      form.addEventListener('submit',(e)=>{
+        e.preventDefault()
+        entrar = false
+        let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        if(!regexEmail.test(mail.value)){
+          aviso.style.color = "red"
+          mail.style.border = "1px solid red"
+          entrar = true
+        }else{
+          mail.style.border = "1px solid green"
+          entrar = false
+        }
+
+        if(asunto.value == ""){
+          aviso.style.color = "red"
+          asunto.style.border = "1px solid red"
+          entrar = true
+        }else{
+          asunto.style.border = "1px solid green"
+          entrar = false
+        }
+
+        if(text.value == ""){
+          aviso.style.color = "red"
+          text.style.border = "1px solid red"
+          entrar = true
+        }else{
+          text.style.border = "1px solid green"
+          entrar = false
+        }
+        
+        
+        if(entrar){
+          aviso.innerHTML = "Uno o varios campos estan incompletos"
+
+        }else{
+          aviso.innerHTML = "Enviado exitosamente"
+          aviso.style.color = "green"
+        }
+      })
+    </script>
+    
+    {% endblock %}
+  </body>
+
+  
+</html>

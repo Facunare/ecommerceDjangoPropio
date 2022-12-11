@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Bagual</title>
+  </head>
+  <body>
+    
+    <!-- {% block content %} -->
+
+    
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+
+    <main class="landing-main">
+      <h1 style="user-select: none;">BAGUAL</h1>
+      <a href="#grilla" style="user-select: none;">
+        <img src="{% static 'arrowdown.svg' %}" alt="" />
+      </a>
+    </main>
+    <div id="grilla" class="landing-grilla-menu">
+      <div class="stock"><a href="{% url 'buy' %}">STOCK</a></div>
+      <div class="aboutus"><a href="{% url 'aboutus' %}">ABOUT US</a></div>
+      <div class="contact"><a href="{% url 'contacto' %}">CONTACT</a></div>
+      {% if user.is_authenticated %}
+      <div class="login"><a href="{% url 'logout' %}">LOG OUT</a></div>
+      {% else %}
+      <div class="login"><a href="{% url 'signin' %}">LOG IN</a></div>
+      {% endif%}
+      <div class="singup"><a href="{% url 'signup' %}">SIGN UP</a></div>
+    </div>
+
+    
+    <!-- {% endblock %} -->
+  </body>
+</html>
