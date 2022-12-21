@@ -114,6 +114,10 @@
   align-items: center;
 }
 
+.productosDelPedido{
+  display: none;
+}
+
 .boton_estado{
   height: 60px;
   width: 60px;

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import  HttpResponseRedirect
 from .models import carrito, stockProducts
-
+from . import forms
 from ecommerce import models
 import operator
 from django.db.models import Sum
@@ -86,3 +86,11 @@ def delete_all(request):
     if request.method == 'POST':
         prods.delete()
         return redirect('cart')
+    
+@login_required
+def preCompra(request):
+    form = forms.preCompra
+    return render(request, 'preCompra.html',{
+        'form': form
+    })
+

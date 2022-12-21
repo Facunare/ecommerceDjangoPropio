@@ -25,6 +25,10 @@ urlpatterns = [
     path('', include('contacto.urls')),
     path('', include('autenticacion.urls')),
     path('', include('carrito.urls')),
+    path('', include('reseñas.urls')),
+    path('', include('productos.urls')),
+    
+    path('', include('pedidos.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 

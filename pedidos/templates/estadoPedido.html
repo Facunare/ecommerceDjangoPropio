@@ -1,0 +1,177 @@
+{% extends 'base.html' %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% block content %}
+
+    <link rel="stylesheet" href="{% static 'product_detail.css'%}" />
+
+    <main class="main-product">
+      
+      <div class="detalle">
+        <img class="logo" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+        {% if pedido.estado == 0 %}
+          <p>¡Espera! Se esta confirmando el pago</p>
+        {% elif pedido.estado == 1 %}
+          <p>¡Excelente! El pago se confirmo. Tu pedido se esta preparando...</p>
+        {% elif pedido.estado == 2 %}
+          <p>¡Ya casi! Tu pedido ya esta en proceso de envio</p>
+        {% elif pedido.estado == 3 %}
+          <p>¡Tu pedido esta en camino!</p>
+        {% endif %}
+      </div>
+      <div class="estadoDelPedido">
+        <div class="estadoPorLogo">
+          {% if pedido.estado == 0 %}
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span1"></span>
+            <img  style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span2"></span>
+            <img style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span3"></span>
+            <img style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+          {% elif pedido.estado == 1 %}
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span1"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span2"></span>
+            <img style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span3"></span>
+            <img style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+          {% elif pedido.estado == 2 %}
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span1"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span2"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span style='background-color: #999;' class="span span3"></span>
+            <img style='filter: invert(.5);' class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+          {% elif pedido.estado == 3 %}
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span1"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span2"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+            <span class="span span3"></span>
+            <img class="logo1" src="{% static 'check-mark-svgrepo-com.svg' %}" alt="">
+          {% endif %}
+          
+        </div>
+        <div class="estadoEnTexto">
+          {% if pedido.estado == 0 %}
+            <h2>Pedido realizado</h2>
+            <h2 style='color: #999;'>Pago confirmado</h2>
+            <h2 style='color: #999;'>Pedido listo</h2>
+            <h2 style='color: #999;'>Pedido enviado</h2>
+          {% elif pedido.estado == 1 %}
+            <h2>Pedido realizado</h2>
+            <h2>Pago confirmado</h2>
+            <h2 style='color: #999;'>Pedido listo</h2>
+            <h2 style='color: #999;'>Pedido enviado</h2>
+          {% elif pedido.estado == 2 %}
+            <h2>Pedido realizado</h2>
+            <h2>Pago confirmado</h2>
+            <h2>Pedido listo</h2>
+            <h2 style='color: #999;'>Pedido listo para retirar</h2>
+          {% elif pedido.estado == 3 %}
+            <h2>Pedido realizado</h2>
+            <h2>Pago confirmado</h2>
+            <h2>Pedido listo</h2>
+            <h2>Pedido enviado</h2>
+          {% endif %}
+          
+        </div>
+      
+      
+      </div>
+
+
+      
+        
+
+    </main>
+    
+  </body>
+  <script>
+
+  </script>
+  <style>
+    {% if pedido.estado == 0 %}
+       .span1, .span2, .span3{
+        background: #777;
+        color: #777;
+       }
+    {% elif pedido.estado == 1 %}
+      
+    {% elif pedido.estado == 2 %}
+     
+    {% elif pedido.estado == 3 %}
+    
+    {% endif %}
+
+    h2{
+      font-size: 15px;
+      margin-bottom: 48px;
+    }
+    
+    .estadoEnTexto{
+      margin-left: 50px;
+    }
+
+    .estadoDelPedido{
+      width: 70vw;
+      box-shadow: 0 0 5px 1px #999;
+      border-radius: 20px;
+      margin-top: 50px;
+      padding: 60px 30px 30px 30px;
+      display: flex;
+    }
+
+    .estadoPorLogo{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: flex-start;
+      padding-left: 70px;
+    }
+
+    .span{
+      height: 40px;
+      width: 3px;
+      background: #000;
+    }
+
+    .main-product{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detalle{
+      width: 70vw;
+      box-shadow: 0 0 5px 1px #999;
+      border-radius: 20px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 100px;
+    }
+
+    .logo{
+      width: 30px;
+      margin-right: 50px;
+    }
+
+    .logo1{
+      width: 30px;
+    }
+  </style>
+  </html>
+  {% endblock %}
