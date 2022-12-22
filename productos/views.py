@@ -79,15 +79,18 @@ def filtrar(request, cat):
 
 @login_required
 def product_detail(request, id):
+    promedio = 0
     if request.method == 'GET':
         product = stockProducts.objects.get(pk=id)
         form = forms.stockForm(instance=product)
         reseñas = valoraciones.objects.all().filter(producto_id=id)
         cantidadEstrellas = valoraciones.objects.filter(producto_id = id).aggregate(Sum('estrellas'))
         cantidadReseñas = valoraciones.objects.filter(producto_id = id).count()
-        print(cantidadReseñas)
-        print(cantidadEstrellas)
-        promedio = cantidadEstrellas['estrellas__sum'] / cantidadReseñas
+        
+        print(cantidadEstrellas['estrellas__sum'] )
+        if cantidadEstrellas['estrellas__sum'] != None:
+            
+            promedio = cantidadEstrellas['estrellas__sum'] / cantidadReseñas
         print(reseñas)
         return render(request, 'product_detail.html',{
             'data': product,
